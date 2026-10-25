@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0f2e">
+<title>Feliz Aniversário, Jheni 💖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rosa:#ff7eb6; --azul:#7cc4ff; --ouro:#ffd98a;
+    --topo:max(24px, env(safe-area-inset-top));
+    --base:max(24px, env(safe-area-inset-bottom));
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{-webkit-text-size-adjust:100%}
+  html,body{margin:0;min-height:100%}
+  body{
+    font-family:'Quicksand',system-ui,-apple-system,sans-serif;
+    color:#fff;overflow-x:hidden;
+    background:radial-gradient(120% 80% at 50% 0%,#2a1d6b 0%,#14174d 45%,#0a0f2e 100%) fixed;
+  }
+  #estrelas{position:fixed;inset:0;z-index:0;pointer-events:none}
+  .estrela{position:absolute;background:#fff;border-radius:50%;animation:piscar 3s ease-in-out infinite}
+  @keyframes piscar{0%,100%{opacity:.15}50%{opacity:.95}}
+
+  .tela{
+    position:fixed;inset:0;z-index:2;display:none;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;
+    padding:var(--topo) 24px var(--base);
+  }
+  .tela.on{display:flex}
+  .emoji{font-size:64px;margin-bottom:8px;animation:flutuar 3s ease-in-out infinite}
+  @keyframes flutuar{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+  h1{font-family:'Dancing Script',cursive;font-size:clamp(40px,12vw,54px);margin:0 0 10px;line-height:1.1;
+     background:linear-gradient(90deg,var(--rosa),var(--ouro),var(--azul));-webkit-background-clip:text;background-clip:text;color:transparent}
+  p.sub{font-size:17px;line-height:1.5;opacity:.85;margin:0 0 28px;max-width:320px}
+
+  button{
+    font:inherit;font-weight:700;font-size:18px;color:#1a1450;border:0;border-radius:999px;
+    padding:16px 34px;background:linear-gradient(135deg,var(--ouro),var(--rosa));
+    box-shadow:0 8px 28px rgba(255,126,182,.45);cursor:pointer;
+  }
+  button:active{transform:scale(.96)}
+  button.leve{background:rgba(255,255,255,.12);color:#fff;box-shadow:none;border:1px solid rgba(255,255,255,.25);font-size:15px;padding:12px 22px}
+
+  /* contagem */
+  .relogio{display:flex;gap:10px;margin:6px 0 26px}
+  .caixa{width:96px;padding:16px 0 12px;border-radius:20px;background:rgba(255,255,255,.08);
+         border:1px solid rgba(255,255,255,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .num{font-size:46px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+  .rot{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin-top:8px}
+  #frase{min-height:52px;font-size:16px;opacity:.85;max-width:300px;line-height:1.5;transition:opacity .6s}
+  #grande{position:fixed;inset:0;z-index:3;display:none;align-items:center;justify-content:center;
+          font-size:38vh;font-weight:700;color:var(--rosa);text-shadow:0 0 50px rgba(255,126,182,.7);
+          background:rgba(10,15,46,.82);pointer-events:none}
+  #grande.on{display:flex}
+  #grande.pop{animation:pop .9s ease-out}
+  @keyframes pop{0%{transform:scale(.4);opacity:0}30%{opacity:1}100%{transform:scale(1.1);opacity:.9}}
+
+  /* festa */
+  #festa{position:relative;inset:auto;min-height:100vh;min-height:100dvh;justify-content:flex-start;padding-top:calc(var(--topo) + 18px)}
+  #festa h1{font-size:clamp(42px,13vw,58px);opacity:0;transform:translateY(14px);transition:all 1s}
+  #festa h1.on{opacity:1;transform:none}
+  .cartao{width:100%;max-width:380px;text-align:left;margin-top:14px}
+  .cartao p{font-size:17px;line-height:1.65;margin:0 0 16px;opacity:0;transform:translateY(12px);transition:opacity 1s,transform 1s;
+            background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:14px 16px}
+  .cartao p.on{opacity:1;transform:none}
+  .foto{width:100%;max-width:380px;border-radius:22px;margin:6px 0 10px;display:none;opacity:0;transition:opacity 1s;
+        box-shadow:0 10px 36px rgba(0,0,0,.45);border:3px solid rgba(255,255,255,.7)}
+  .foto.on{display:block;opacity:1}
+  .legenda{font-size:14px;opacity:.75;margin-bottom:18px}
+  .assinatura{font-family:'Dancing Script',cursive;font-size:32px;margin:6px 0 22px;opacity:0;transition:opacity 1.2s}
+  .assinatura.on{opacity:1}
+  #acoes{display:flex;flex-direction:column;gap:12px;align-items:center;opacity:0;transition:opacity 1s;padding-bottom:var(--base)}
+  #acoes.on{opacity:1}
+
+  #confete{position:fixed;inset:0;z-index:6;pointer-events:none}
+  .balao{position:fixed;bottom:-140px;z-index:4;width:48px;height:60px;border-radius:50% 50% 50% 50%/58% 58% 42% 42%;
+         pointer-events:none;animation:subir linear forwards}
+  .balao::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:46px;background:rgba(255,255,255,.5)}
+  @keyframes subir{to{transform:translateY(-130vh) translateX(var(--vai,0px))}}
+  .flash{position:fixed;inset:0;z-index:7;background:#fff;pointer-events:none;animation:flash 1.2s ease-out forwards}
+  @keyframes flash{from{opacity:.9}to{opacity:0}}
+
+  @media (max-height:700px){.emoji{font-size:48px}.num{font-size:38px}.caixa{width:86px}}
+</style>
+</head>
+<body>
+<div id="estrelas"></div>
+<canvas id="confete"></canvas>
+<div id="grande"></div>
+
+<!-- 1. Entrada (precisa de um toque para liberar o som no iPhone) -->
+<section class="tela on" id="entrada">
+  <div class="emoji">💌</div>
+  <h1>Oi, Jheni</h1>
+  <p class="sub">Tem uma surpresa te esperando.<br>Deixa o som ligado e a tela aberta 💙</p>
+  <button id="abrir">Abrir surpresa</button>
+</section>
+
+<!-- 2. Contagem regressiva -->
+<section class="tela" id="contagem">
+  <div class="emoji">🎂</div>
+  <h1>Falta pouquinho…</h1>
+  <p class="sub">…para o seu dia começar</p>
+  <div class="relogio">
+    <div class="caixa"><div class="num" id="h">00</div><div class="rot">horas</div></div>
+    <div class="caixa"><div class="num" id="m">00</div><div class="rot">min</div></div>
+    <div class="caixa"><div class="num" id="s">00</div><div class="rot">seg</div></div>
+  </div>
+  <div id="frase"></div>
+</section>
+
+<!-- 3. Festa -->
+<section class="tela" id="festa">
+  <div class="emoji">🎉</div>
+  <h1 id="titulo">Parabéns, Jheni!</h1>
+  <div class="cartao" id="cartao"></div>
+  <img class="foto" id="foto" alt="">
+  <div class="legenda" id="legenda"></div>
+  <div class="assinatura" id="assinatura"></div>
+  <div id="acoes">
+    <button id="tocar">🎵 Ouvir a música de novo</button>
+    <button class="leve" id="chuva">🎊 Mais confete</button>
+  </div>
+</section>
+
+<script>
+/* ========= EDITE AQUI ========= */
+const CONFIG = {
+  nome: "Jheni",
+  alvo: "2026-10-26T00:00:00-03:00",          // meia-noite, horário de Brasília
+  assinatura: "Com carinho, Murilo 💙",
+  foto: "imagens/banguela.jpeg",              // deixe "" para não mostrar foto
+  legenda: "Você e o Banguela, guardião oficial dos seus dias bons 🐾",
+  frases: [
+    "Cada segundo te deixa um pouquinho mais perto do seu dia 💙",
+    "Segura a ansiedade, já já começa ✨",
+    "Alguém preparou isso com muito carinho 💌",
+    "Não fecha a página, hein? 😄"
+  ],
+  mensagem: [
+    "ESCREVA AQUI o primeiro parágrafo da mensagem.",
+    "ESCREVA AQUI o segundo parágrafo.",
+    "ESCREVA AQUI o último parágrafo. Feliz aniversário! 💖"
+  ]
+};
+/* ============================== */
+
+const $ = id => document.getElementById(id);
+const teste = new URLSearchParams(location.search).get("teste");   // ex.: ?teste=15 → dispara em 15 s
+let alvo = teste ? Date.now() + Number(teste) * 1000 : Date.parse(CONFIG.alvo);
+let ctx = null, festaIniciada = false, ultimoSeg = null;
+
+/* estrelas */
+(function(){
+  const c = $("estrelas");
+  for(let i=0;i<70;i++){
+    const e = document.createElement("div"); e.className="estrela";
+    const t = Math.random()*2.2+.8;
+    e.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${t}px;height:${t}px;animation-delay:${Math.random()*3}s;animation-duration:${2+Math.random()*3}s`;
+    c.appendChild(e);
+  }
+})();
+
+/* áudio (precisa ser criado no toque do usuário) */
+function liberarAudio(){
+  try{ if(navigator.audioSession) navigator.audioSession.type = "playback"; }catch(e){}   // toca mesmo com o modo silencioso no iPhone
+  try{
+    const AC = window.AudioContext || window.webkitAudioContext;
+    ctx = ctx || new AC();
+    ctx.resume();
+    const b = ctx.createBuffer(1,1,22050), s = ctx.createBufferSource();
+    s.buffer=b; s.connect(ctx.destination); s.start(0);
+  }catch(e){}
+}
+function nota(midi, quando, dur){
+  const f = 440*Math.pow(2,(midi-69)/12);
+  const g = ctx.createGain(); g.connect(ctx.destination);
+  g.gain.setValueAtTime(0.0001,quando);
+  g.gain.exponentialRampToValueAtTime(0.32,quando+0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001,quando+dur+0.25);
+  [[f,"sine",1],[f*2,"triangle",.35]].forEach(([fr,tipo,v])=>{
+    const o = ctx.createOscillator(); const gv = ctx.createGain();
+    o.type=tipo; o.frequency.value=fr; gv.gain.value=v;
+    o.connect(gv); gv.connect(g); o.start(quando); o.stop(quando+dur+0.3);
+  });
+}
+function tocarMusica(){
+  if(!ctx) return;
+  ctx.resume();
+  const beat = 60/96;
+  const seq = [
+    [67,.75],[67,.25],[69,1],[67,1],[72,1],[71,2],
+    [67,.75],[67,.25],[69,1],[67,1],[74,1],[72,2],
+    [67,.75],[67,.25],[79,1],[76,1],[72,1],[71,1],[69,2],
+    [77,.75],[77,.25],[76,1],[72,1],[74,1],[72,2]
+  ];
+  let t = ctx.currentTime + 0.15;
+  for(let r=0;r<2;r++) for(const [m,d] of seq){ nota(m,t,d*beat*0.9); t += d*beat; }
+}
+
+/* confete */
+const cv = $("confete"), c2 = cv.getContext("2d");
+let parts = [], confeteAte = 0, rodando = false;
+function ajustar(){ const d=window.devicePixelRatio||1; cv.width=innerWidth*d; cv.height=innerHeight*d; c2.setTransform(d,0,0,d,0,0); }
+addEventListener("resize",ajustar); ajustar();
+const cores = ["#ff7eb6","#ffd98a","#7cc4ff","#b9a3ff","#8dffc0","#fff"];
+function jorrar(n){
+  for(let i=0;i<n;i++) parts.push({
+    x:Math.random()*innerWidth, y:-20-Math.random()*200,
+    vx:(Math.random()-.5)*2.6, vy:2+Math.random()*3.4,
+    w:6+Math.random()*6, h:8+Math.random()*8, r:Math.random()*6, vr:(Math.random()-.5)*.25,
+    c:cores[(Math.random()*cores.length)|0]
+  });
+  if(!rodando){ rodando=true; requestAnimationFrame(quadro); }
+}
+function quadro(){
+  c2.clearRect(0,0,innerWidth,innerHeight);
+  if(Date.now()<confeteAte && parts.length<260) jorrar(3);
+  parts.forEach(p=>{ p.x+=p.vx+Math.sin(p.y/40)*.6; p.y+=p.vy; p.r+=p.vr;
+    c2.save(); c2.translate(p.x,p.y); c2.rotate(p.r); c2.fillStyle=p.c; c2.fillRect(-p.w/2,-p.h/2,p.w,p.h); c2.restore(); });
+  parts = parts.filter(p=>p.y<innerHeight+30);
+  if(parts.length || Date.now()<confeteAte) requestAnimationFrame(quadro); else rodando=false;
+}
+function chuvaDeConfete(ms){ confeteAte = Date.now()+ms; jorrar(120); }
+
+function baloes(n){
+  for(let i=0;i<n;i++){
+    const b = document.createElement("div"); b.className="balao";
+    const cor = cores[i%5];
+    b.style.cssText = `left:${Math.random()*92}%;background:radial-gradient(circle at 35% 30%,#fff8 0,${cor} 45%,${cor}cc 100%);
+      animation-duration:${7+Math.random()*6}s;animation-delay:${Math.random()*3}s;--vai:${(Math.random()-.5)*80}px`;
+    document.body.appendChild(b); setTimeout(()=>b.remove(),16000);
+  }
+}
+
+/* contagem */
+const dois = n => String(n).padStart(2,"0");
+function tick(){
+  const falta = alvo - Date.now();
+  if(falta <= 0){ if(!festaIniciada && abriu) festa(); return; }
+  if(!abriu) return;
+  const tot = Math.ceil(falta/1000);
+  $("h").textContent = dois(Math.floor(tot/3600));
+  $("m").textContent = dois(Math.floor(tot%3600/60));
+  $("s").textContent = dois(tot%60);
+  if(tot<=10){
+    $("grande").classList.add("on");
+    if(ultimoSeg!==tot){ ultimoSeg=tot; const g=$("grande"); g.textContent=tot; g.classList.remove("pop"); void g.offsetWidth; g.classList.add("pop"); }
+  }
+}
+
+let abriu = false, iFrase = 0;
+function mostrar(id){ document.querySelectorAll(".tela").forEach(t=>t.classList.remove("on")); $(id).classList.add("on"); }
+function girarFrase(){
+  const f=$("frase"); f.style.opacity=0;
+  setTimeout(()=>{ f.textContent=CONFIG.frases[iFrase++%CONFIG.frases.length]; f.style.opacity=.85; },600);
+}
+
+$("abrir").addEventListener("click",()=>{
+  abriu = true; liberarAudio();
+  if(Date.now()>=alvo){ festa(); return; }
+  mostrar("contagem"); girarFrase(); setInterval(girarFrase,6000); tick();
+});
+
+function festa(){
+  if(festaIniciada) return; festaIniciada = true;
+  $("grande").classList.remove("on");
+  mostrar("festa"); scrollTo(0,0);
+  const fl=document.createElement("div"); fl.className="flash"; document.body.appendChild(fl); setTimeout(()=>fl.remove(),1300);
+  chuvaDeConfete(9000); baloes(16); tocarMusica();
+  if(navigator.vibrate) navigator.vibrate([200,100,200]);
+
+  $("titulo").textContent = `Parabéns, ${CONFIG.nome}!`;
+  setTimeout(()=>$("titulo").classList.add("on"),500);
+
+  const cartao = $("cartao"); cartao.innerHTML="";
+  let atraso = 2200;
+  CONFIG.mensagem.forEach(txt=>{
+    const p=document.createElement("p"); p.textContent=txt; cartao.appendChild(p);
+    setTimeout(()=>p.classList.add("on"),atraso); atraso += 2600;
+  });
+  if(CONFIG.foto){
+    const img=$("foto"); img.src=CONFIG.foto; img.alt=CONFIG.legenda;
+    img.onload=()=>setTimeout(()=>{ img.classList.add("on"); $("legenda").textContent=CONFIG.legenda; },atraso);
+    atraso += 1800;
+  }
+  setTimeout(()=>{ $("assinatura").textContent=CONFIG.assinatura; $("assinatura").classList.add("on"); },atraso);
+  setTimeout(()=>$("acoes").classList.add("on"),atraso+800);
+}
+
+$("tocar").addEventListener("click",()=>{ liberarAudio(); tocarMusica(); });
+$("chuva").addEventListener("click",()=>{ chuvaDeConfete(5000); baloes(10); });
+
+setInterval(tick,250);
+document.addEventListener("visibilitychange",()=>{ if(!document.hidden){ if(ctx) ctx.resume(); tick(); } });
+</script>
+</body>
+</html>
