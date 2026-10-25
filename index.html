@@ -7,7 +7,7 @@
 <title>Feliz Aniversário, Jheni 💖</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --rosa:#ff7eb6; --azul:#7cc4ff; --ouro:#ffd98a;
@@ -18,7 +18,7 @@
   html{-webkit-text-size-adjust:100%}
   html,body{margin:0;min-height:100%}
   body{
-    font-family:'Quicksand',system-ui,-apple-system,sans-serif;
+    font-family:'Poppins',system-ui,-apple-system,sans-serif;
     color:#fff;overflow-x:hidden;
     background:radial-gradient(120% 80% at 50% 0%,#2a1d6b 0%,#14174d 45%,#0a0f2e 100%) fixed;
   }
@@ -51,7 +51,7 @@
   .relogio{display:flex;gap:10px;margin:6px 0 26px}
   .caixa{width:96px;padding:16px 0 12px;border-radius:20px;background:rgba(255,255,255,.08);
          border:1px solid rgba(255,255,255,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-  .num{font-size:46px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+  .num{font-size:44px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
   .rot{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin-top:8px}
   #frase{min-height:52px;font-size:16px;opacity:.85;max-width:300px;line-height:1.5;transition:opacity .6s}
   #grande{position:fixed;inset:0;z-index:3;display:none;align-items:center;justify-content:center;
@@ -66,12 +66,13 @@
   #festa h1{font-size:clamp(42px,13vw,58px);opacity:0;transform:translateY(14px);transition:all 1s}
   #festa h1.on{opacity:1;transform:none}
   .cartao{width:100%;max-width:380px;text-align:left;margin-top:14px}
-  .cartao p{font-size:17px;line-height:1.65;margin:0 0 16px;opacity:0;transform:translateY(12px);transition:opacity 1s,transform 1s;
+  .cartao p{font-family:'Lora',Georgia,serif;font-size:17px;line-height:1.7;margin:0 0 16px;opacity:0;transform:translateY(12px);transition:opacity 1s,transform 1s;
             background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:14px 16px}
   .cartao p.on{opacity:1;transform:none}
-  .foto{width:100%;max-width:380px;border-radius:22px;margin:6px 0 10px;display:none;opacity:0;transition:opacity 1s;
+  .foto{width:100%;max-width:380px;border-radius:22px;margin:6px 0 10px;display:block;opacity:0;transition:opacity 1s;
         box-shadow:0 10px 36px rgba(0,0,0,.45);border:3px solid rgba(255,255,255,.7)}
-  .foto.on{display:block;opacity:1}
+  .foto.on{opacity:1}
+  .foto:not([src]){display:none}
   .legenda{font-size:14px;opacity:.75;margin-bottom:18px}
   .assinatura{font-family:'Dancing Script',cursive;font-size:32px;margin:6px 0 22px;opacity:0;transition:opacity 1.2s}
   .assinatura.on{opacity:1}
@@ -120,8 +121,6 @@
   <div class="emoji">🎉</div>
   <h1 id="titulo">Parabéns, Jheni!</h1>
   <div class="cartao" id="cartao"></div>
-  <img class="foto" id="foto" alt="">
-  <div class="legenda" id="legenda"></div>
   <div class="assinatura" id="assinatura"></div>
   <div id="acoes">
     <button id="tocar">🎵 Ouvir a música de novo</button>
@@ -135,18 +134,24 @@ const CONFIG = {
   nome: "Jheni",
   alvo: "2026-10-26T00:00:00-03:00",          // meia-noite, horário de Brasília
   assinatura: "Com carinho, Murilo 💙",
-  foto: "imagens/banguela.jpeg",              // deixe "" para não mostrar foto
-  legenda: "Você e o Banguela, guardião oficial dos seus dias bons 🐾",
   frases: [
     "Cada segundo te deixa um pouquinho mais perto do seu dia 💙",
     "Segura a ansiedade, já já começa ✨",
     "Alguém preparou isso com muito carinho 💌",
     "Não fecha a página, hein? 😄"
   ],
+  musica: "musica/videogames.mp3",            // coloque o MP3 nesta pasta/nome (se faltar, toca o "Parabéns" gerado)
   mensagem: [
-    "ESCREVA AQUI o primeiro parágrafo da mensagem.",
-    "ESCREVA AQUI o segundo parágrafo.",
-    "ESCREVA AQUI o último parágrafo. Feliz aniversário! 💖"
+    "Mais um ano da sua vida começando, e eu não poderia deixar essa data passar sem tirar um tempinho para te lembrar o quanto você é uma pessoa especial para mim.",
+    "Sinceramente, às vezes eu fico pensando em como a vida muda com o passar do tempo. Parece que foi ontem que a gente tinha muito mais tempo para conversar, se encontrar e compartilhar momentos, e agora, aos poucos, cada um vai seguindo seu próprio caminho, lidando com suas responsabilidades, seus planos e todas aquelas coisas que vêm junto com o crescimento. Acho que essa é uma das partes mais estranhas de se tornar adulto: perceber que o tempo parece passar cada vez mais rápido e que, mesmo querendo estar presente na vida de quem a gente gosta, nem sempre conseguimos estar tão perto quanto gostaríamos.",
+    "E, apesar de fazer um tempinho que a gente não se vê, quero que você saiba que isso não muda a consideração e o carinho que tenho por você. Pelo contrário, conforme o tempo passa, percebo cada vez mais o valor das pessoas que realmente fazem a diferença na nossa vida. E você, com toda a certeza, é uma dessas pessoas.",
+    "Você é uma garota incrível, alguém por quem tenho muito carinho e, principalmente, muita confiança. Não é todo dia que encontramos pessoas com quem podemos contar de verdade, pessoas que nos passam segurança e com quem podemos ser nós mesmos. E fico feliz por ter encontrado isso na nossa amizade. Talvez eu não fale isso com tanta frequência quanto deveria, mas você é uma das pessoas em quem mais confio, e considero isso algo muito valioso.",
+    "Neste novo ciclo, eu desejo de coração que a vida seja generosa com você. Que você consiga realizar seus sonhos, alcançar seus objetivos e encontrar felicidade até nas coisas mais simples do dia a dia. Que não faltem saúde, paz, amor, oportunidades e motivos para sorrir. Que você tenha força para enfrentar os momentos difíceis, paciência para lidar com as incertezas e coragem para continuar buscando tudo aquilo que deseja para o seu futuro.",
+    "Espero também que você nunca se esqueça do quanto é capaz e do quanto merece coisas boas. Que, mesmo nos dias em que tudo parecer complicado, você consiga enxergar o seu próprio valor e se lembrar de que ainda existem muitas coisas incríveis esperando por você. Torço muito para que você conquiste tudo aquilo que sonha, e que, quando olhar para trás, consiga sentir orgulho da pessoa que está se tornando e de tudo o que superou para chegar até aqui.",
+    "E, claro, espero que a gente consiga se encontrar logo! Já faz bastante tempo desde a última vez, e seria muito bom colocar o papo em dia, dar umas risadas e compartilhar novos momentos. Às vezes a rotina acaba afastando um pouco as pessoas, mesmo quando existe carinho de verdade, mas espero que a gente não deixe a correria da vida fazer com que esses reencontros demorem tanto assim. Afinal, ainda temos muita conversa para colocar em dia, né? Kkkkk.",
+    "Enfim, Jennifer, feliz aniversário! Obrigado por ser essa pessoa tão especial e por fazer parte da minha vida. Independentemente do tempo que passe ou de como as coisas mudem daqui para frente, espero que você saiba que tem alguém aqui que torce muito pela sua felicidade e pelas suas conquistas.",
+    "Que esse novo ano seja cheio de histórias boas, novas experiências, momentos inesquecíveis e pessoas que façam você se sentir tão especial quanto realmente é. Você merece tudo de melhor que a vida tem para oferecer. Nunca se esqueça disso!",
+    "Feliz aniversário, Jennifer! Que seu dia seja tão incrível quanto você. ❤️"
   ]
 };
 /* ============================== */
@@ -190,7 +195,28 @@ function nota(midi, quando, dur){
     o.connect(gv); gv.connect(g); o.start(quando); o.stop(quando+dur+0.3);
   });
 }
+/* música em MP3 (elemento destravado no toque inicial) */
+const audio = new Audio();
+function prepararMusica(){
+  if(!CONFIG.musica) return;
+  try{
+    audio.src = CONFIG.musica; audio.preload = "auto"; audio.load();
+    const p = audio.play();
+    if(p) p.then(()=>{ audio.pause(); audio.currentTime = 0; }).catch(()=>{});
+  }catch(e){}
+}
 function tocarMusica(){
+  if(CONFIG.musica){
+    try{
+      audio.currentTime = 0;
+      const p = audio.play();
+      if(p) p.catch(()=>{ tocarJingle(); });
+      return;
+    }catch(e){}
+  }
+  tocarJingle();
+}
+function tocarJingle(){
   if(!ctx) return;
   ctx.resume();
   const beat = 60/96;
@@ -263,7 +289,7 @@ function girarFrase(){
 }
 
 $("abrir").addEventListener("click",()=>{
-  abriu = true; liberarAudio();
+  abriu = true; liberarAudio(); prepararMusica();
   if(Date.now()>=alvo){ festa(); return; }
   mostrar("contagem"); girarFrase(); setInterval(girarFrase,6000); tick();
 });
@@ -279,19 +305,18 @@ function festa(){
   $("titulo").textContent = `Parabéns, ${CONFIG.nome}!`;
   setTimeout(()=>$("titulo").classList.add("on"),500);
 
+  /* cada bloco aparece quando ela rola até ele (texto longo) */
+  const obs = new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add("on"); obs.unobserve(e.target); }
+  }),{threshold:.15});
   const cartao = $("cartao"); cartao.innerHTML="";
-  let atraso = 2200;
-  CONFIG.mensagem.forEach(txt=>{
-    const p=document.createElement("p"); p.textContent=txt; cartao.appendChild(p);
-    setTimeout(()=>p.classList.add("on"),atraso); atraso += 2600;
-  });
-  if(CONFIG.foto){
-    const img=$("foto"); img.src=CONFIG.foto; img.alt=CONFIG.legenda;
-    img.onload=()=>setTimeout(()=>{ img.classList.add("on"); $("legenda").textContent=CONFIG.legenda; },atraso);
-    atraso += 1800;
-  }
-  setTimeout(()=>{ $("assinatura").textContent=CONFIG.assinatura; $("assinatura").classList.add("on"); },atraso);
-  setTimeout(()=>$("acoes").classList.add("on"),atraso+800);
+  setTimeout(()=>{
+    CONFIG.mensagem.forEach(txt=>{
+      const p=document.createElement("p"); p.textContent=txt; cartao.appendChild(p); obs.observe(p);
+    });
+    $("assinatura").textContent=CONFIG.assinatura; obs.observe($("assinatura"));
+    obs.observe($("acoes"));
+  },1800);
 }
 
 $("tocar").addEventListener("click",()=>{ liberarAudio(); tocarMusica(); });
