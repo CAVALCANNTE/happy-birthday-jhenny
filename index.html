@@ -79,6 +79,23 @@
   #acoes{display:flex;flex-direction:column;gap:12px;align-items:center;opacity:0;transition:opacity 1s;padding-bottom:var(--base)}
   #acoes.on{opacity:1}
 
+  /* vale-presente */
+  #vale{position:fixed;inset:0;z-index:8;display:none;align-items:center;justify-content:center;padding:24px;
+        background:rgba(6,9,30,.82);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  #vale.on{display:flex}
+  .ticket{width:100%;max-width:360px;text-align:center;padding:26px 22px 22px;border-radius:22px;color:#3a1d4d;
+          background:linear-gradient(160deg,#fff4d6,#ffd1e6);border:3px dashed #c4478a;
+          box-shadow:0 18px 50px rgba(0,0,0,.55);animation:entra .6s cubic-bezier(.2,1.3,.4,1)}
+  @keyframes entra{from{transform:scale(.6) rotate(-4deg);opacity:0}to{transform:none;opacity:1}}
+  .vale-topo{font-size:44px}
+  .vale-t{font-family:'Dancing Script',cursive;font-size:40px;font-weight:700;line-height:1.1;color:#b0286e;margin-top:4px}
+  .vale-d{font-weight:600;font-size:17px;margin-top:4px}
+  .vale-linha{border-top:2px dashed rgba(176,40,110,.45);margin:16px 0}
+  .vale-o{font-size:17px;font-weight:500}
+  .vale-v{font-size:13px;opacity:.75;margin-top:8px}
+  .vale-r{font-size:12px;font-style:italic;font-weight:500;color:#8a2a52;margin-top:10px}
+  .vale-a{font-family:'Dancing Script',cursive;font-size:28px;margin:12px 0 16px;color:#b0286e}
+  .ticket button.leve{color:#3a1d4d;border-color:rgba(58,29,77,.4);background:rgba(255,255,255,.55)}
   #confete{position:fixed;inset:0;z-index:6;pointer-events:none}
   .balao{position:fixed;bottom:-140px;z-index:4;width:48px;height:60px;border-radius:50% 50% 50% 50%/58% 58% 42% 42%;
          pointer-events:none;animation:subir linear forwards}
@@ -93,6 +110,19 @@
 <body>
 <div id="estrelas"></div>
 <canvas id="confete"></canvas>
+<div id="vale" aria-hidden="true">
+  <div class="ticket">
+    <div class="vale-topo">🎁</div>
+    <div class="vale-t" id="valeT"></div>
+    <div class="vale-d" id="valeD"></div>
+    <div class="vale-linha"></div>
+    <div class="vale-o" id="valeO"></div>
+    <div class="vale-v" id="valeV"></div>
+    <div class="vale-r" id="valeR"></div>
+    <div class="vale-a" id="valeA"></div>
+    <button class="leve" id="valeFechar">Fechar</button>
+  </div>
+</div>
 <div id="grande"></div>
 
 <!-- 1. Entrada (precisa de um toque para liberar o som no iPhone) -->
@@ -123,6 +153,7 @@
   <div class="cartao" id="cartao"></div>
   <div class="assinatura" id="assinatura"></div>
   <div id="acoes">
+    <button id="presente">🎁 Tem mais uma coisa…</button>
     <button id="tocar">🎵 Ouvir a música de novo</button>
     <button class="leve" id="chuva">🎊 Mais confete</button>
   </div>
@@ -140,6 +171,14 @@ const CONFIG = {
     "Alguém preparou isso com muito carinho 💌",
     "Não fecha a página, hein? 😄"
   ],
+  vale: {
+    titulo: "Vale um presente",
+    detalhe: "de aniversário 🎂",
+    obs: "Estou te devendo 😅",
+    validade: "Validade: assim que a gente se encontrar 💙",
+    regra: "* Obs.: não vale pedir o meu sangue 🩸😂",
+    assinatura: "Murilo"
+  },
   musica: "musica/videogames.mp3",            // coloque o MP3 nesta pasta/nome (se faltar, toca o "Parabéns" gerado)
   mensagem: [
     "Mais um ano da sua vida começando, e eu não poderia deixar essa data passar sem tirar um tempinho para te lembrar o quanto você é uma pessoa especial para mim.",
@@ -320,6 +359,14 @@ function festa(){
 }
 
 $("tocar").addEventListener("click",()=>{ liberarAudio(); tocarMusica(); });
+$("presente").addEventListener("click",()=>{
+  const v = CONFIG.vale;
+  $("valeT").textContent = v.titulo; $("valeD").textContent = v.detalhe;
+  $("valeO").textContent = v.obs; $("valeV").textContent = v.validade; $("valeR").textContent = v.regra;$("valeA").textContent = v.assinatura;
+  $("vale").classList.add("on"); $("vale").setAttribute("aria-hidden","false");
+  chuvaDeConfete(3500);
+});
+$("valeFechar").addEventListener("click",()=>{ $("vale").classList.remove("on"); $("vale").setAttribute("aria-hidden","true"); });
 $("chuva").addEventListener("click",()=>{ chuvaDeConfete(5000); baloes(10); });
 
 setInterval(tick,250);
